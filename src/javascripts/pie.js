@@ -27,9 +27,5 @@ const plot = new Plottable.Plots.Pie()
 	.innerRadius(60)
 	.attr('fill', d => d.val, colorScale);
 
-// plot.foreground().append('circle').attr({
-// 	r: 3,
-// 	opacity: 1
-// });
 
 export default (container) => plot.renderTo(container);
