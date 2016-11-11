@@ -20,12 +20,11 @@ const data = [{
 	val: 6
 }];
 
-const plot = new Plottable.Plots.Pie()
+export default (container) =>
+new Plottable.Plots.Pie()
 	.addDataset(new Plottable.Dataset(data))
 	.sectorValue(d => d.val, scale)
 	.labelsEnabled(true)
 	.innerRadius(60)
-	.attr('fill', d => d.val, colorScale);
-
-
-export default (container) => plot.renderTo(container);
+	.attr('fill', d => d.val, colorScale)
+	.renderTo(container);
