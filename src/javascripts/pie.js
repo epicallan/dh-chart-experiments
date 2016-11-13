@@ -24,20 +24,20 @@ const plot = new Pie()
 	.renderTo('svg#pie');
 
 const boundingBox = plot._boundingBox[0][0];
-const cx = boundingBox.width.baseVal.value / 2;
-const cy = boundingBox.height.baseVal.value / 2;
+const centerX = boundingBox.width.baseVal.value / 2;
+const centerY = boundingBox.height.baseVal.value / 2;
 
 plot.entities().forEach((slice, datumIndex) => {
 	const c = slice.component;
 	const theta = (c._endAngles[datumIndex] + c._startAngles[datumIndex]) / 2;
 	const start = {
-		x: cx + Math.sin(theta) * 115,
-		y: cy + (-Math.cos(theta) * 115)
+		x: centerX + Math.sin(theta) * 115,
+		y: centerY + (-Math.cos(theta) * 115)
 	};
 
 	const stop = {
-		x: cx + Math.sin(theta) * 140,
-		y: cy + (-Math.cos(theta) * 140)
+		x: centerX + Math.sin(theta) * 140,
+		y: centerY + (-Math.cos(theta) * 140)
 	};
 	const dirX = Math.sin(theta) / Math.abs(Math.sin(theta));
 
@@ -50,7 +50,7 @@ plot.entities().forEach((slice, datumIndex) => {
 			const points = [
 				[start.x, start.y],
 				[stop.x, stop.y],
-				[cx + dirX * 150, stop.y]
+				[centerX + dirX * 150, stop.y]
 			];
 			return points.map(p => p.join(' ')).join(',');
 		});
@@ -60,7 +60,7 @@ plot.entities().forEach((slice, datumIndex) => {
 		.append('text')
 		.text(slice.datum)
 		.attr({
-			x: cx + dirX * 150,
+			x: centerX + dirX * 150,
 			y: stop.y + 5,
 			'text-anchor': dirX > 0 ? 'start' : 'end'
 		});
