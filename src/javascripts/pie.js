@@ -27,28 +27,19 @@ const boundingBox = plot._boundingBox[0][0];
 const cx = boundingBox.width.baseVal.value / 2;
 const cy = boundingBox.height.baseVal.value / 2;
 
-plot.entities().forEach((a, i) => {
-	const c = a.component;
-	const theta = c._endAngles[i] - c._startAngles[i];
-	const angle = Math.PI - (c._startAngles[i] + theta / 2);
-	const k = angle < 0 ?
-		-0.5 * Math.PI :
-		0.5 * Math.PI;
-
+plot.entities().forEach((slice, datumIndex) => {
+	const c = slice.component;
+	const theta = (c._endAngles[datumIndex] + c._startAngles[datumIndex]) / 2;
 	const start = {
-		x: cx + Math.sin(angle) * 110,
-		y: cy + Math.cos(angle) * 110
+		x: cx + Math.sin(theta) * 115,
+		y: cy + (-Math.cos(theta) * 115)
 	};
 
 	const stop = {
-		x: cx + Math.sin(angle) * 125,
-		y: cy + Math.cos(angle) * 125
+		x: cx + Math.sin(theta) * 140,
+		y: cy + (-Math.cos(theta) * 140)
 	};
-
-	const textStart = {
-		x: cx + Math.sin(angle) * 160,
-		y: cy + Math.cos(angle) * 160
-	};
+	const dirX = Math.sin(theta) / Math.abs(Math.sin(theta));
 
 	plot
 		.foreground()
@@ -59,7 +50,7 @@ plot.entities().forEach((a, i) => {
 			const points = [
 				[start.x, start.y],
 				[stop.x, stop.y],
-				[cx + Math.sin(k) * 130, stop.y]
+				[cx + dirX * 150, stop.y]
 			];
 			return points.map(p => p.join(' ')).join(',');
 		});
@@ -67,21 +58,11 @@ plot.entities().forEach((a, i) => {
 	plot
 		.foreground()
 		.append('text')
-		.text(a.datum)
+		.text(slice.datum)
 		.attr({
-			x: cx + Math.sin(k) * 135,
+			x: cx + dirX * 150,
 			y: stop.y + 5,
-			'text-anchor': angle > 0 ? 'start' : 'end'
-		});
-
-	plot
-		.foreground()
-		.append('circle')
-		.attr({
-			stroke: '#000',
-			cx: start.x,
-			cy: start.y,
-			r: 1
+			'text-anchor': dirX > 0 ? 'start' : 'end'
 		});
 });
 
