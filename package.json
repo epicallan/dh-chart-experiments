@@ -17,7 +17,7 @@
   "scripts": {
     "rm": "rm -rf  node_modules/plottable",
     "copy": " cp -a ~/test-apps/plottable ~/apps/plottable-tests/node_modules/plottable",
-    "development": "npm run rm && npm run copy && gulp development",
+    "development": "gulp development",
     "build": "npm run rm && npm run copy && NODE_ENV=production gulp build",
     "lint": "eslint ."
   },
