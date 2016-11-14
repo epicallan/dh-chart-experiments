@@ -1,7 +1,12 @@
 extends layouts/main
 
 block content
-		h3 Donnut chart
-		svg(id = "pie", width="500" height="320")
-		h3 StackedBar chart
-		svg(id = "StackedBar", width="500" height="320")
+		div(style = "display:flex")
+			div(style = "width = 50%")
+				h3 Donnut chart
+				svg(id = "pie", width="500" height="320")
+				h3 StackedBar chart
+				svg(id = "StackedBar", width="500" height="320")
+			div(style = "width = 50%")
+				h3 Line chart
+				svg(id = "line", width="500" height="320")
