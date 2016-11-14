@@ -39,6 +39,7 @@ plot.entities().forEach((slice, datumIndex) => {
 		x: centerX + Math.sin(theta) * 140,
 		y: centerY + (-Math.cos(theta) * 140)
 	};
+
 	const dirX = Math.sin(theta) / Math.abs(Math.sin(theta));
 
 	plot
