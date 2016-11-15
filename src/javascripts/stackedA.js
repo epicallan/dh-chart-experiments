@@ -61,6 +61,7 @@ const plotCategories = new Plottable.Plots.StackedBar('horizontal')
 	.y(d => d.y, yScaleCategories)
 	.attr('fill', (d) => colors[d.i])
 	.attr('stroke', '#fff')
+	// .labelsEnabled(true)
 	.attr('stroke-width', 2);
 
 categoryDatasets.forEach((category) => {
@@ -79,6 +80,7 @@ const plotGroups = new Plottable.Plots.StackedBar()
 	.attr('fill', '#333')
 	.attr('stroke', '#fff')
 	.attr('stroke-width', 2)
+	// .labelsEnabled(true)
 	.x((d) => d.x, xScaleGroups)
 	.y((d) => d.y, yScaleGroups);
 

@@ -1,4 +1,7 @@
-
+.plottable .out-labels {
+  font-size: 0.9em;
+  font-weight: bold;
+}
 .plottable-colors-0 {
   background-color: #5279c7; /* INDIGO */
 }
@@ -76,7 +79,7 @@ svg.plottable {
 }
 
 .plottable .dark-label text {
-  fill: #32313F;
+  fill: white;
 }
 
 .plottable .off-bar-label text {
@@ -102,7 +105,7 @@ svg.plottable {
 }
 
 .plottable .axis line.baseline {
-  stroke: #CCC;
+  stroke: #000000;
   stroke-width: 1px;
 }
 
@@ -141,8 +144,8 @@ svg.plottable {
 }
 
 .plottable .gridlines line {
-  stroke: #3C3C3C; /* hackhack: gridlines should be solid; see #820 */
-  opacity: 0.25;
+  stroke: #87d5ee; /* hackhack: gridlines should be solid; see #820 */
+  /*opacity: 0.25;*/
   stroke-width: 1px;
 }
 
