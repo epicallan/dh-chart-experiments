@@ -2,20 +2,31 @@ extends layouts/main
 
 block content
 		div(style = "display:flex")
-			div(style = "width = 50%")
+			div(style = "width:50%")
 				h3 Donnut chart
 				svg(id = "pieB", width="500" height="320")
-			div(style = "width = 50%")
+			div(style = "width:50%")
 				h3 Line chart
 				svg(id = "line", width="500" height="320")
 		div(style = "display:flex")
-			div(style = "width = 50%")
+			div(style = "width:50%")
 				h3 Pie chart B
 				svg(id = "pie", width="500" height="320")
-			div(style = "width = 50%")
-				h3 StackedBar chart A
-				svg(id = "StackedBar", width="500" height="320")
+			div(style = "width:50%")
+				h3 column chart A
+				svg(id = "columnA", width="400" height="320")
 		div(style = "display:flex")
-			div(style = "width = 50%")
+			div(style = "width:50%")
 				h3 Stacked chart B
-					svg(id = "stackedB", width="500" height="320")
+				svg(id = "sidebar", width="500" height="320")
+			div(style = "width:50%")
+				h3 Stacked chart B
+				svg(id = "bar", width="500" height="320")
+		div(style = "display:flex")
+			div(style = "width:100%")
+				h3 Stacked chart B
+				svg(id = "stackedA", width="800" height="350")
+		div(style = "display:flex")
+			div(style = "width:100%")
+				h3 Stacked chart B
+				svg(id = "stackedB", width="500" height="300")

@@ -1,5 +1,5 @@
 import Plottable from 'plottable';
-import d3 from 'd3';
+import cleanUp from './utility';
 
 const data = [
 	[{
@@ -84,40 +84,4 @@ plot.selections()[0].forEach((path, index) => {
 		});
 });
 
-
-// grid lines configurations
-d3.select('.y-gridlines')
-	.selectAll('line')
-	.attr('stroke-dasharray', '1 5');
-
-// YAxis
-const yaxisElm = d3.select('.y-axis');
-yaxisElm.select('.tick-mark-container').remove();
-yaxisElm.select('.baseline').remove();
-
-// add Labels;
-// const lineALastEntity = entities[entities.length / 2 - 1];
-// const lineBlastEntity = entities[entities.length - 1];
-
-// datasets.forEach(set => {
-// 	const entities = plot.entities([set]);
-// 	const path = entities[0].selection[0][0];
-// 	const point = path.getPointAtLength(path.getTotalLength());
-// 	plot.foreground()
-// 		.append('text')
-// 		.text('Hello')
-// 		.attr({
-// 			x: point.x + 10,
-// 			y: point.y + 5
-// 		});
-// });
-
-// show hidden tick Labels
-d3.select('#line')
-	.selectAll('.tick-label')
-	.attr('style', 'visibility:visible');
-
-// hide xScale tick marks
-d3.select('#line')
-	.selectAll('.tick-mark')
-	.attr('style', 'visibility:hidden');
+cleanUp('#line');

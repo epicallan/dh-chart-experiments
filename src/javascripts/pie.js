@@ -2,21 +2,26 @@ import Plottable from 'plottable';
 
 const scale = new Plottable.Scales.Linear();
 
-const colorScale = new Plottable.Scales
-	.InterpolatedColor()
-	.range(['#BDCEF0', '#5279C7']);
-const innerRadius = 100;
-const outerRadius = 120;
+const innerRadius = 90;
+const outerRadius = 130;
 
-const data = [10, 20, 30, 40, 50, 60, 5];
+const data = [{
+	value: 10,
+	color: 'red',
+	label: 'south of sahara'
+}, {
+	value: 90,
+	color: 'pink',
+	label: 'north of sahara'
+}];
 
 const Pie = Plottable.Plots.Pie;
 
 
 const plot = new Pie()
 	.addDataset(new Plottable.Dataset(data))
-	.sectorValue(d => d, scale)
-	.attr('fill', (d) => d, colorScale)
+	.sectorValue(d => d.value, scale)
+	.attr('fill', (d) => d.color)
 	.attr('stroke', '#fff')
 	.attr('stroke-width', '3px')
 	.innerRadius(innerRadius)
@@ -51,7 +56,7 @@ plot.entities().forEach((slice, datumIndex) => {
 			const points = [
 				[start.x, start.y],
 				[stop.x, stop.y],
-				[centerX + dirX * 150, stop.y]
+				[centerX + dirX * 90, stop.y]
 			];
 			return points.map(p => p.join(' ')).join(',');
 		});
@@ -59,9 +64,9 @@ plot.entities().forEach((slice, datumIndex) => {
 	plot
 		.foreground()
 		.append('text')
-		.text(slice.datum)
+		.text(`${slice.datum.label}: ${slice.datum.value}%`)
 		.attr({
-			x: centerX + dirX * 150,
+			x: centerX + dirX * 95,
 			y: stop.y + 5,
 			'text-anchor': dirX > 0 ? 'start' : 'end'
 		});

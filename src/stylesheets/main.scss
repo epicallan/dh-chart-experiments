@@ -1,5 +1,5 @@
-.plottable .out-labels {
-  font-size: 0.9em;
+.plottable .out-labels, .plottable text {
+  font-size: 0.8em;
   font-weight: bold;
 }
 .plottable-colors-0 {
@@ -140,8 +140,7 @@ svg.plottable {
 }
 
 .plottable .gridlines line {
-  stroke: #87d5ee; /* hackhack: gridlines should be solid; see #820 */
-  /*opacity: 0.25;*/
+  stroke: #999;
   stroke-width: 1px;
 }
 
