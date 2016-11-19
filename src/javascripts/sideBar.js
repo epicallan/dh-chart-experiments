@@ -32,12 +32,12 @@ const categoryDatasets = data.categories.map((category, i) =>
 		({
 			y: group.name,
 			x: group.values[i],
-			label: category,
 			i
 		})
 	))
 );
 
+console.log('sidebar', categoryDatasets);
 /*
 Category Plot
 --------------

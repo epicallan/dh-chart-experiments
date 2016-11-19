@@ -87,7 +87,7 @@ const plotCategories = new StackedBar('horizontal')
 	.x(d => d.x, xScaleCategories)
 	.y(d => d.y, yScaleCategories)
 	.labelsEnabled(true)
-	.attr("fill", (d, i, dataset) => colors[d.i])
+	.attr('fill', (d, i, dataset) => colors[d.i])
 	.attr('stroke', '#fff')
 	.attr('stroke-width', 2);
 
@@ -105,7 +105,7 @@ xScaleGroups.innerPadding(0);
 xScaleGroups.outerPadding(0);
 
 const plotGroups = new Plottable.Plots.StackedBar()
-	.attr("fill", 'red')
+	.attr('fill', 'red')
 	.attr('stroke', '#fff')
 	.attr('stroke-width', 2)
 	.x(d => d.x, xScaleGroups)
@@ -113,11 +113,9 @@ const plotGroups = new Plottable.Plots.StackedBar()
 
 // We reverse the dataset because we want the top group
 // to align with (to be near to) it's categories
-groupDatasets.reverse().forEach(group => {
-	plotGroups.addDataset(group)
-})
+groupDatasets.reverse().forEach(group => plotGroups.addDataset(group));
 
-/****
+/*
 Chart Setup
 --------------
 **************/
@@ -128,9 +126,9 @@ const columnChartPad = 170;
 chart.columnWeight(0, 1);
 chart.columnWeight(1, 10);
 chart.columnPadding(columnChartPad);
-chart.renderTo("svg#stackedB");
+chart.renderTo('svg#stackedB');
 
-/****
+/*
 Labels Setup
 --------------
 **************/

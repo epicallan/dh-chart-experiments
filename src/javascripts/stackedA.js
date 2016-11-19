@@ -3,34 +3,41 @@ import cleanUp from './utility';
 
 const data = {
 	name: 'Sector Distribution of Funds',
-	categories: ['Infrastructure', 'Security', 'Governance', 'Health', 'Agriculture'],
 	groups: [{
 		name: 'Uganda',
-		values: [12, 34, 54, 65, 80]
+		colors: ['#D0123B', '#E1646D'],
+		values: [20, 34]
 	}, {
+		colors: ['#37373a', '#434348'],
 		name: 'Kenya',
-		values: [23, 43, 20, 40, 25]
+		values: [10, 43]
 	}, {
 		name: 'Rwanda',
-		values: [50, 35, 50, 25, 50]
-	}, {
-		name: 'Southern Sudan',
-		values: [12, 43, 54, 12, 34]
+		colors: ['#F46F17', '#e0964b'],
+		values: [12, 45]
 	}]
 };
 
 /*
 Dataset Preparation
 */
+// {name,sum,categories: [...{name, value}]}
+const categories = {
+	Uganda: ['Infrastructure is a long word that should wrap nicely', 'Security'],
+	Kenya: ['roads ', 'health'],
+	Rwanda: ['Health', 'medicare'],
+};
 
 const groups = data.groups.map(group =>
 	({
 		name: group.name,
 		sum: group.values.reduce((s, v) => s + v, 0),
+		color: group.colors[0],
 		categories: group.values
-			.map((v, i) => ({
-				name: data.categories[i],
-				value: v
+			.map((value, index) => ({
+				name: categories[group.name][index],
+				value,
+				color: group.colors[index]
 			}))
 			.sort((a, b) => a.value - b.value)
 	}));
@@ -41,7 +48,7 @@ Scale
 **************/
 const xScale = new Plottable.Scales.Category();
 const yScale = new Plottable.Scales.Linear();
-const colors = ['#820933', '#D84797', '#D2FDFF', '#3ABEFF', '#26FFE6'];
+
 xScale.innerPadding(0);
 xScale.outerPadding(0);
 
@@ -71,12 +78,13 @@ const _drawLables = function () {
 			const baseline = rect.parentNode.parentNode.lastChild;
 			if (rect.height.baseVal.value > 30) {
 				this.foreground()
-					.append('text')
-					.text(`${entity.datum.label}, ${entity.datum.value}`)
-					.attr('x', baseline.x2.baseVal.value / 2)
+					.append('foreignObject')
+					.attr('width', rect.width.baseVal.value)
+					.attr('height', rect.height.baseVal.value / 2)
+					.attr('x', baseline.x1.baseVal.value)
 					.attr('y', rect.y.baseVal.value + rect.height.baseVal.value / 2)
-					.attr('text-anchor', 'middle')
-					.attr('fill', '#fff');
+					.append('xhtml:body')
+					.html(`<p class = 'p-labels'>${entity.datum.label}, ${entity.datum.value}</p>`);
 			}
 		});
 };
@@ -91,33 +99,36 @@ Plots
 groups.forEach((group, index) => {
 	const plotGroups = new Bar()
 		.attr('style', 'width: 100%')
-		.attr('fill', colors[index])
+		.attr('fill', d => d.color)
 		.x(d => d.x, xScale)
+		.attr('stroke', '#fff')
+		.attr('stroke-width', 2)
 		.y(d => d.y, new Plottable.Scales.Linear())
 		.labelsEnabled(true)
 		.addDataset(new Plottable.Dataset([{
 			x: 1,
 			y: 1,
+			color: group.color,
 			label: group.name,
 			value: group.sum
 		}]));
 
 	const plotCategories = new StackedBar()
 		.attr('style', 'width: 100%')
-		.attr('fill', colors[index])
+		.attr('fill', d => d.color)
 		.attr('stroke', '#fff')
-		.attr('stroke-width', 1)
+		.attr('stroke-width', 2)
 		.labelsEnabled(true)
 		.x(d => d.x, xScale)
 		.y(d => d.y, yScale);
 
-	group.categories.forEach((category, i) => {
+	group.categories.forEach((category) => {
 		plotCategories.addDataset(new Plottable.Dataset([{
 			x: 1,
 			y: category.value / group.sum,
 			label: category.name,
 			value: category.value,
-			i
+			color: category.color
 		}]));
 	});
 
